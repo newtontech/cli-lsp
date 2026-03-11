@@ -1,0 +1,37 @@
+{
+  "name": "cli-lsp",
+  "version": "0.1.0",
+  "description": "LSP interface for CLI tools to help AI agents call commands correctly",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "cli-lsp": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "serve": "node dist/server/index.js"
+  },
+  "keywords": [
+    "cli",
+    "lsp",
+    "ai",
+    "language-server-protocol",
+    "validation",
+    "autocomplete"
+  ],
+  "author": "NewtonTech",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.5.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "vscode-languageserver": "^9.0.0",
+    "vscode-languageserver-textdocument": "^9.0.0",
+    "zod": "^3.22.0"
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "openclaw",
+  "version": "2026.3.8",
+  "description": "OpenClaw AI Agent Framework",
+  "commands": {
+    "gateway": {
+      "description": "Manage OpenClaw Gateway service",
+      "subcommands": {
+        "start": {
+          "description": "Start the gateway service",
+          "params": {
+            "port": {
+              "type": "number",
+              "default": 3000,
+              "description": "Gateway port",
+              "validation": "range(1,65535)",
+              "required": false
+            },
+            "config": {
+              "type": "string",
+              "description": "Path to config file",
+              "validation": "file_exists",
+              "required": false
+            },
+            "host": {
+              "type": "string",
+              "default": "127.0.0.1",
+              "description": "Bind host",
+              "required": false
+            }
+          },
+          "examples": [
+            "openclaw gateway start",
+            "openclaw gateway start --port 8080",
+            "openclaw gateway start --config ~/.openclaw/custom.json"
+          ]
+        },
+        "stop": {
+          "description": "Stop the gateway service",
+          "params": {},
+          "examples": [
+            "openclaw gateway stop"
+          ]
+        },
+        "status": {
+          "description": "Check gateway status",
+          "params": {},
+          "examples": [
+            "openclaw gateway status"
+          ]
+        },
+        "restart": {
+          "description": "Restart the gateway service",
+          "params": {},
+          "examples": [
+            "openclaw gateway restart"
+          ]
+        },
+        "install": {
+          "description": "Install gateway as system service",
+          "params": {},
+          "examples": [
+            "openclaw gateway install"
+          ]
+        }
+      }
+    },
+    "plugins": {
+      "description": "Manage plugins",
+      "subcommands": {
+        "install": {
+          "description": "Install a plugin",
+          "params": {
+            "plugin": {
+              "type": "string",
+              "description": "Plugin name or path",
+              "required": true
+            }
+          },
+          "examples": [
+            "openclaw plugins install @openclaw/feishu",
+            "openclaw plugins install ./extensions/custom"
+          ]
+        },
+        "list": {
+          "description": "List installed plugins",
+          "params": {},
+          "examples": [
+            "openclaw plugins list"
+          ]
+        }
+      }
+    },
+    "channels": {
+      "description": "Manage communication channels",
+      "subcommands": {
+        "add": {
+          "description": "Add a new channel",
+          "params": {
+            "channel": {
+              "type": "string",
+              "description": "Channel type (feishu, telegram, discord, etc.)",
+              "required": true,
+              "enum": ["feishu", "telegram", "discord", "slack", "whatsapp"]
+            }
+          },
+          "examples": [
+            "openclaw channels add",
+            "openclaw channels add feishu"
+          ]
+        },
+        "list": {
+          "description": "List configured channels",
+          "params": {},
+          "examples": [
+            "openclaw channels list"
+          ]
+        }
+      }
+    },
+    "pairing": {
+      "description": "Manage device pairing",
+      "subcommands": {
+        "list": {
+          "description": "List pending pairing requests",
+          "params": {
+            "channel": {
+              "type": "string",
+              "description": "Channel to filter",
+              "required": false
+            }
+          },
+          "examples": [
+            "openclaw pairing list",
+            "openclaw pairing list feishu"
+          ]
+        },
+        "approve": {
+          "description": "Approve a pairing request",
+          "params": {
+            "channel": {
+              "type": "string",
+              "description": "Channel name",
+              "required": true
+            },
+            "code": {
+              "type": "string",
+              "description": "Pairing code",
+              "required": true
+            }
+          },
+          "examples": [
+            "openclaw pairing approve feishu ABC123"
+          ]
+        }
+      }
+    },
+    "logs": {
+      "description": "View gateway logs",
+      "params": {
+        "follow": {
+          "type": "boolean",
+          "description": "Follow log output",
+          "alias": "f",
+          "default": false
+        },
+        "lines": {
+          "type": "number",
+          "description": "Number of lines to show",
+          "alias": "n",
+          "default": 100
+        }
+      },
+      "examples": [
+        "openclaw logs",
+        "openclaw logs --follow",
+        "openclaw logs -n 200"
+      ]
+    },
+    "status": {
+      "description": "Show system status",
+      "params": {},
+      "examples": [
+        "openclaw status"
+      ]
+    }
+  }
+}

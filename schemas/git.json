@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "git",
+  "version": "2.43.0",
+  "description": "Git version control system",
+  "commands": {
+    "add": {
+      "description": "Add file contents to the index",
+      "params": {
+        "pathspec": {
+          "type": "string",
+          "description": "Files to add",
+          "required": true,
+          "variadic": true
+        },
+        "all": {
+          "type": "boolean",
+          "description": "Add all files",
+          "alias": "A",
+          "default": false
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Allow adding ignored files",
+          "alias": "f",
+          "default": false
+        }
+      },
+      "examples": [
+        "git add .",
+        "git add -A",
+        "git add src/main.ts"
+      ]
+    },
+    "commit": {
+      "description": "Record changes to the repository",
+      "params": {
+        "message": {
+          "type": "string",
+          "description": "Commit message",
+          "alias": "m",
+          "required": true
+        },
+        "amend": {
+          "type": "boolean",
+          "description": "Amend previous commit",
+          "default": false
+        },
+        "noVerify": {
+          "type": "boolean",
+          "description": "Bypass pre-commit hooks",
+          "default": false
+        }
+      },
+      "examples": [
+        "git commit -m \"Add new feature\"",
+        "git commit --amend -m \"Updated message\""
+      ]
+    },
+    "push": {
+      "description": "Update remote refs",
+      "params": {
+        "repository": {
+          "type": "string",
+          "description": "Remote repository",
+          "default": "origin"
+        },
+        "refspec": {
+          "type": "string",
+          "description": "Ref to push",
+          "required": false
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Force push",
+          "alias": "f",
+          "default": false
+        },
+        "setUpstream": {
+          "type": "boolean",
+          "description": "Set upstream for new branch",
+          "alias": "u",
+          "default": false
+        }
+      },
+      "examples": [
+        "git push",
+        "git push origin main",
+        "git push -u origin feature",
+        "git push --force"
+      ]
+    },
+    "pull": {
+      "description": "Fetch from and integrate with another repository",
+      "params": {
+        "repository": {
+          "type": "string",
+          "description": "Remote repository",
+          "default": "origin"
+        },
+        "refspec": {
+          "type": "string",
+          "description": "Ref to pull",
+          "required": false
+        },
+        "rebase": {
+          "type": "boolean",
+          "description": "Rebase instead of merge",
+          "alias": "r",
+          "default": false
+        }
+      },
+      "examples": [
+        "git pull",
+        "git pull origin main",
+        "git pull --rebase"
+      ]
+    },
+    "checkout": {
+      "description": "Switch branches or restore working tree files",
+      "params": {
+        "branch": {
+          "type": "string",
+          "description": "Branch to checkout",
+          "required": false
+        },
+        "b": {
+          "type": "boolean",
+          "description": "Create new branch",
+          "default": false
+        },
+        "pathspec": {
+          "type": "string",
+          "description": "Files to restore",
+          "variadic": true
+        }
+      },
+      "examples": [
+        "git checkout main",
+        "git checkout -b feature/new-feature",
+        "git checkout -- src/main.ts"
+      ]
+    }
+  }
+}
